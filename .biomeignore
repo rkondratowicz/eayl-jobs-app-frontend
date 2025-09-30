@@ -1,0 +1,9 @@
+# Generated files
+public/styles.css
+dist/
+
+# Node modules
+node_modules/
+
+# Coverage reports
+coverage/

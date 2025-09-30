@@ -20,6 +20,7 @@ nunjucks.configure(path.join(__dirname, "../views"), {
 app.set("view engine", "njk");
 
 // Middleware
+app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
 
 // Routes
