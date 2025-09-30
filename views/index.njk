@@ -6,40 +6,71 @@
     <title>{{ title }}</title>
     <link rel="stylesheet" href="/styles.css">
 </head>
-<body class="bg-slate-50 text-slate-700 max-w-4xl mx-auto p-8">
+<body class="bg-base-200 text-base-content max-w-4xl mx-auto p-8">
     <header class="text-center mb-8">
-        <h1 class="text-slate-900 text-4xl font-bold mb-2">{{ title }}</h1>
-        <p class="text-slate-600 text-lg">{{ description }}</p>
+        <h1 class="text-primary text-4xl font-bold mb-2">{{ title }}</h1>
+        <p class="text-base-content/70 text-lg">{{ description }}</p>
     </header>
 
-    <div class="bg-white rounded-lg shadow-sm p-6 mb-4">
-        <div class="bg-blue-50 p-4 rounded-md border-l-4 border-blue-500">
-            <h2 class="text-xl font-semibold mb-2 text-gray-900">Welcome to your Nunjucks-powered app!</h2>
-            <p class="mb-2 text-gray-700">This template is now styled with Tailwind CSS and rendered using Nunjucks templating engine.</p>
-            <p class="text-gray-700"><strong class="font-medium">Message:</strong> {{ message }}</p>
+    <div class="card bg-base-100 shadow-xl mb-4">
+        <div class="card-body">
+            <div class="alert alert-info">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="stroke-current shrink-0 w-6 h-6"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                <div>
+                    <h3 class="font-bold">Welcome to your Nunjucks-powered app!</h3>
+                    <div class="text-xs">This template is now styled with Tailwind CSS, DaisyUI components, and rendered using Nunjucks templating engine.</div>
+                </div>
+            </div>
+            <p class="mt-4"><strong class="font-medium">Message:</strong> {{ message }}</p>
+            <div class="card-actions justify-end mt-4">
+                <button class="btn btn-primary">Get Started</button>
+                <button class="btn btn-outline">Learn More</button>
+            </div>
         </div>
     </div>
 
-    <div class="bg-white rounded-lg shadow-sm p-6">
-        <h3 class="text-lg font-semibold mb-4 text-gray-900">Template Features</h3>
-        <ul class="space-y-2 text-gray-700">
-            <li class="flex items-start">
-                <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                Server-side rendering with Nunjucks
-            </li>
-            <li class="flex items-start">
-                <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                TypeScript support
-            </li>
-            <li class="flex items-start">
-                <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                Express.js backend
-            </li>
-            <li class="flex items-start">
-                <span class="inline-block w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3 flex-shrink-0"></span>
-                Tailwind CSS styling with CLI setup
-            </li>
-        </ul>
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title">Template Features</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div class="badge badge-primary badge-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-2 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Server-side rendering with Nunjucks
+                </div>
+                <div class="badge badge-secondary badge-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-2 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    TypeScript support
+                </div>
+                <div class="badge badge-accent badge-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-2 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                    Express.js backend
+                </div>
+                <div class="badge badge-info badge-lg">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" class="w-4 h-4 mr-2 stroke-current"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zM21 5a2 2 0 00-2-2h-4a2 2 0 00-2 2v12a4 4 0 004 4h4a2 2 0 002-2V5z"></path></svg>
+                    Tailwind CSS + DaisyUI
+                </div>
+            </div>
+            
+            <div class="divider">Component Examples</div>
+            
+            <div class="flex flex-wrap gap-2 justify-center">
+                <div class="tooltip" data-tip="Primary Button">
+                    <button class="btn btn-primary btn-sm">Primary</button>
+                </div>
+                <div class="tooltip" data-tip="Secondary Button">
+                    <button class="btn btn-secondary btn-sm">Secondary</button>
+                </div>
+                <div class="tooltip" data-tip="Success Button">
+                    <button class="btn btn-success btn-sm">Success</button>
+                </div>
+                <div class="tooltip" data-tip="Warning Button">
+                    <button class="btn btn-warning btn-sm">Warning</button>
+                </div>
+                <div class="tooltip" data-tip="Error Button">
+                    <button class="btn btn-error btn-sm">Error</button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>
