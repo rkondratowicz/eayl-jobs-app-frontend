@@ -46,15 +46,34 @@
         {% block header %}{% endblock %}
         
         {% block content %}{% endblock %}
-        
-        {% block footer %}
-        <div class="text-center mt-8">
-            <div class="text-base-content/60 text-sm">
-                Last updated: {{ currentDateTime }}
-            </div>
-        </div>
-        {% endblock %}
     </div>
+    
+    <!-- Footer -->
+    <footer class="footer footer-center bg-base-300 text-base-content p-10 mt-8">
+        <aside class="grid-flow-col items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0H8" />
+            </svg>
+            <div>
+                <p class="font-bold text-lg">JobHub</p>
+                <p class="text-base-content/70">Connecting talent with opportunity since 2025</p>
+            </div>
+        </aside>
+        <nav>
+            <div class="grid grid-flow-col gap-4">
+                <a href="/" class="link link-hover">Home</a>
+                <a href="/job-roles" class="link link-hover">Job Roles</a>
+                <a href="#" class="link link-hover">About</a>
+                <a href="#" class="link link-hover">Contact</a>
+            </div>
+        </nav>
+        <aside class="text-base-content/60 text-sm">
+            <p>&copy; 2025 JobHub. All rights reserved.</p>
+            {% if currentDateTime %}
+            <p>Last updated: {{ currentDateTime }}</p>
+            {% endif %}
+        </aside>
+    </footer>
     
     {% block scripts %}{% endblock %}
 </body>
