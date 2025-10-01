@@ -1,76 +1,183 @@
 {% extends "layout.njk" %}
 
-{% block bodyClass %}bg-base-200 text-base-content{% endblock %}
+{% block bodyClass %}bg-base-100 text-base-content{% endblock %}
 
-{% block containerClass %}max-w-4xl mx-auto p-8{% endblock %}
+{% block containerClass %}{% endblock %}
 
-{% block header %}
-<header class="text-center mb-8">
-    <h1 class="text-primary text-4xl font-bold mb-2">{{ title }}</h1>
-    <p class="text-base-content/70 text-lg">{{ description }}</p>
-</header>
-{% endblock %}
+{% block header %}{% endblock %}
 
 {% block content %}
-
-    <div class="card bg-base-100 shadow-xl mb-4">
-        <div class="card-body">
-            <div class="alert alert-info">
-                <i data-lucide="info" class="stroke-current shrink-0 w-6 h-6"></i>
-                <div>
-                    <h3 class="font-bold">Welcome to your Nunjucks-powered app!</h3>
-                    <div class="text-xs">This template is now styled with Tailwind CSS, DaisyUI components, and rendered using Nunjucks templating engine.</div>
-                </div>
-            </div>
-            <p class="mt-4"><strong class="font-medium">Message:</strong> {{ message }}</p>
-            <div class="card-actions justify-end mt-4">
-                <button class="btn btn-primary">Get Started</button>
-                <button class="btn btn-outline">Learn More</button>
-            </div>
-        </div>
+<!-- Hero Section -->
+<div class="hero bg-gradient-to-r from-primary/10 to-secondary/10 min-h-screen">
+  <div class="hero-content text-center">
+    <div class="max-w-2xl">
+      <div class="badge badge-primary badge-lg mb-6">
+        <i data-lucide="briefcase" class="w-4 h-4 mr-2 stroke-current"></i>
+        Career Opportunities
+      </div>
+      
+      <h1 class="text-5xl md:text-6xl font-bold mb-6">
+        {{ title }}
+      </h1>
+      
+      <p class="text-xl text-base-content/80 mb-6">
+        {{ subtitle }}
+      </p>
+      
+      <p class="text-base-content/70 mb-8 max-w-xl mx-auto">
+        {{ heroMessage }}
+      </p>
+      
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/job-roles" class="btn btn-primary btn-lg">
+          <i data-lucide="search" class="w-5 h-5 mr-2 stroke-current"></i>
+          Explore Job Roles
+        </a>
+        <a href="#features" class="btn btn-outline btn-lg">
+          <i data-lucide="info" class="w-5 h-5 mr-2 stroke-current"></i>
+          Learn More
+        </a>
+      </div>
     </div>
+  </div>
+</div>
 
-    <div class="card bg-base-100 shadow-xl">
-        <div class="card-body">
-            <h2 class="card-title">Template Features</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div class="badge badge-primary badge-lg">
-                    <i data-lucide="zap" class="w-4 h-4 mr-2 stroke-current"></i>
-                    Server-side rendering with Nunjucks
-                </div>
-                <div class="badge badge-secondary badge-lg">
-                    <i data-lucide="check-circle" class="w-4 h-4 mr-2 stroke-current"></i>
-                    TypeScript support
-                </div>
-                <div class="badge badge-accent badge-lg">
-                    <i data-lucide="server" class="w-4 h-4 mr-2 stroke-current"></i>
-                    Express.js backend
-                </div>
-                <div class="badge badge-info badge-lg">
-                    <i data-lucide="palette" class="w-4 h-4 mr-2 stroke-current"></i>
-                    Tailwind CSS + DaisyUI
-                </div>
-            </div>
-            
-            <div class="divider">Component Examples</div>
-            
-            <div class="flex flex-wrap gap-2 justify-center">
-                <div class="tooltip" data-tip="Primary Button">
-                    <button class="btn btn-primary btn-sm">Primary</button>
-                </div>
-                <div class="tooltip" data-tip="Secondary Button">
-                    <button class="btn btn-secondary btn-sm">Secondary</button>
-                </div>
-                <div class="tooltip" data-tip="Success Button">
-                    <button class="btn btn-success btn-sm">Success</button>
-                </div>
-                <div class="tooltip" data-tip="Warning Button">
-                    <button class="btn btn-warning btn-sm">Warning</button>
-                </div>
-                <div class="tooltip" data-tip="Error Button">
-                    <button class="btn btn-error btn-sm">Error</button>
-                </div>
-            </div>
-        </div>
+<!-- Features Section -->
+<div id="features" class="py-16 bg-base-200">
+  <div class="container mx-auto px-4 max-w-6xl">
+    <div class="text-center mb-12">
+      <h2 class="text-3xl md:text-4xl font-bold mb-4">Why Choose Our Platform?</h2>
+      <p class="text-base-content/70 text-lg max-w-2xl mx-auto">
+        Discover the features that make finding your next career opportunity easier than ever.
+      </p>
     </div>
+    
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Feature 1 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body text-center">
+          <div class="flex justify-center mb-4">
+            <div class="bg-primary text-primary-content w-16 h-16 rounded-full flex items-center justify-center">
+              <i data-lucide="users" class="w-8 h-8 stroke-current"></i>
+            </div>
+          </div>
+          <h3 class="card-title justify-center mb-2">Curated Job Roles</h3>
+          <p class="text-base-content/70">
+            Browse through carefully selected job opportunities from top companies across various industries.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Feature 2 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body text-center">
+          <div class="flex justify-center mb-4">
+            <div class="bg-secondary text-secondary-content w-16 h-16 rounded-full flex items-center justify-center">
+              <i data-lucide="target" class="w-8 h-8 stroke-current"></i>
+            </div>
+          </div>
+          <h3 class="card-title justify-center mb-2">Skills Matching</h3>
+          <p class="text-base-content/70">
+            Find roles that match your skills and experience level with our intelligent matching system.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Feature 3 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body text-center">
+          <div class="flex justify-center mb-4">
+            <div class="bg-accent text-accent-content w-16 h-16 rounded-full flex items-center justify-center">
+              <i data-lucide="trending-up" class="w-8 h-8 stroke-current"></i>
+            </div>
+          </div>
+          <h3 class="card-title justify-center mb-2">Career Growth</h3>
+          <p class="text-base-content/70">
+            Access detailed information about career progression paths and growth opportunities.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Feature 4 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body text-center">
+          <div class="flex justify-center mb-4">
+            <div class="bg-info text-info-content w-16 h-16 rounded-full flex items-center justify-center">
+              <i data-lucide="clock" class="w-8 h-8 stroke-current"></i>
+            </div>
+          </div>
+          <h3 class="card-title justify-center mb-2">Real-Time Updates</h3>
+          <p class="text-base-content/70">
+            Stay informed with the latest job postings and industry trends updated in real-time.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Feature 5 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body text-center">
+          <div class="flex justify-center mb-4">
+            <div class="bg-success text-success-content w-16 h-16 rounded-full flex items-center justify-center">
+              <i data-lucide="shield-check" class="w-8 h-8 stroke-current"></i>
+            </div>
+          </div>
+          <h3 class="card-title justify-center mb-2">Verified Companies</h3>
+          <p class="text-base-content/70">
+            All job postings come from verified companies with proven track records and positive work environments.
+          </p>
+        </div>
+      </div>
+      
+      <!-- Feature 6 -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body text-center">
+          <div class="flex justify-center mb-4">
+            <div class="bg-warning text-warning-content w-16 h-16 rounded-full flex items-center justify-center">
+              <i data-lucide="headphones" class="w-8 h-8 stroke-current"></i>
+            </div>
+          </div>
+          <h3 class="card-title justify-center mb-2">Expert Support</h3>
+          <p class="text-base-content/70">
+            Get personalized career advice and support from our team of experienced career consultants.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Call to Action Section -->
+<div class="py-16 bg-base-100">
+  <div class="container mx-auto px-4 max-w-4xl text-center">
+    <h2 class="text-3xl md:text-4xl font-bold mb-6">Ready to Start Your Journey?</h2>
+    <p class="text-xl text-base-content/70 mb-8 max-w-2xl mx-auto">
+      Join thousands of professionals who have found their dream jobs through our platform.
+    </p>
+    
+    <div class="stats shadow mb-8">
+      <div class="stat">
+        <div class="stat-title">Active Job Roles</div>
+        <div class="stat-value text-primary">1,200+</div>
+        <div class="stat-desc">Updated daily</div>
+      </div>
+      
+      <div class="stat">
+        <div class="stat-title">Companies</div>
+        <div class="stat-value text-secondary">500+</div>
+        <div class="stat-desc">Verified partners</div>
+      </div>
+      
+      <div class="stat">
+        <div class="stat-title">Success Rate</div>
+        <div class="stat-value text-accent">94%</div>
+        <div class="stat-desc">Job placement</div>
+      </div>
+    </div>
+    
+    <a href="/job-roles" class="btn btn-primary btn-lg">
+      <i data-lucide="arrow-right" class="w-5 h-5 mr-2 stroke-current"></i>
+      Get Started Now
+    </a>
+  </div>
+</div>
 {% endblock %}
