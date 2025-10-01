@@ -1,16 +1,17 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="lofi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <link rel="stylesheet" href="/styles.css">
-</head>
-<body class="bg-base-200 text-base-content max-w-4xl mx-auto p-8">
-    <header class="text-center mb-8">
-        <h1 class="text-primary text-4xl font-bold mb-2">{{ title }}</h1>
-        <p class="text-base-content/70 text-lg">{{ description }}</p>
-    </header>
+{% extends "layout.njk" %}
+
+{% block bodyClass %}bg-base-200 text-base-content{% endblock %}
+
+{% block containerClass %}max-w-4xl mx-auto p-8{% endblock %}
+
+{% block header %}
+<header class="text-center mb-8">
+    <h1 class="text-primary text-4xl font-bold mb-2">{{ title }}</h1>
+    <p class="text-base-content/70 text-lg">{{ description }}</p>
+</header>
+{% endblock %}
+
+{% block content %}
 
     <div class="card bg-base-100 shadow-xl mb-4">
         <div class="card-body">
@@ -72,5 +73,4 @@
             </div>
         </div>
     </div>
-</body>
-</html>
+{% endblock %}

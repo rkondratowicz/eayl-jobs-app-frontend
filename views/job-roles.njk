@@ -1,21 +1,19 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="lofi">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ title }}</title>
-    <link href="/styles.css" rel="stylesheet">
-</head>
-<body class="bg-base-200 min-h-screen">
-    <div class="container mx-auto p-6">
-        <!-- Header -->
-        <div class="mb-8">
-            <h1 class="text-4xl font-bold text-center mb-2">{{ title }}</h1>
-            <p class="text-center text-base-content/70">{{ description }}</p>
-            <div class="text-center mt-2">
-                <div class="text-lg font-semibold">{{ count }} positions available</div>
-            </div>
-        </div>
+{% extends "layout.njk" %}
+
+{% block navbarActions %}
+<div class="badge badge-primary badge-lg">
+    {{ count }} positions
+</div>
+{% endblock %}
+
+{% block header %}
+<div class="mb-8">
+    <h1 class="text-4xl font-bold text-center mb-2">{{ title }}</h1>
+    <p class="text-center text-base-content/70">{{ description }}</p>
+</div>
+{% endblock %}
+
+{% block content %}
 
         <!-- Job Roles Table -->
         <div class="max-w-6xl mx-auto">
@@ -111,13 +109,4 @@
             
             {% endif %}
         </div>
-
-        <!-- Footer -->
-        <div class="text-center mt-8">
-            <div class="text-base-content/60 text-sm">
-                Last updated: {{ currentDateTime }}
-            </div>
-        </div>
-    </div>
-</body>
-</html>
+{% endblock %}
