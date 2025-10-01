@@ -23,14 +23,11 @@ app.set("view engine", "njk");
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
 
-// Routes
-app.get("/", (_req, res) => {
-  res.render("index", {
-    title: "Jobs App Frontend",
-    description: "A modern TypeScript application with Nunjucks templating",
-    message: "Hello from Nunjucks! 🚀",
-  });
-});
+// Import and configure routes
+import { configureRoutes } from "./routes";
+
+// Configure all routes
+configureRoutes(app);
 
 // Start server
 app.listen(port, () => {
