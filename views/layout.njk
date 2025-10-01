@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
     <link href="/styles.css" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
     {% block head %}{% endblock %}
 </head>
 <body class="bg-base-200 {% block bodyClass %}min-h-screen{% endblock %}">
@@ -13,9 +14,7 @@
         <div class="navbar-start">
             <div class="dropdown">
                 <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" />
-                    </svg>
+                    <i data-lucide="menu" class="h-5 w-5"></i>
                 </div>
                 <ul tabindex="0" class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
                     <li><a href="/">Home</a></li>
@@ -23,9 +22,7 @@
                 </ul>
             </div>
             <a href="/" class="btn btn-ghost text-xl">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0H8" />
-                </svg>
+                <i data-lucide="briefcase" class="h-6 w-6 mr-2"></i>
                 JobHub
             </a>
         </div>
@@ -51,9 +48,7 @@
     <!-- Footer -->
     <footer class="footer footer-center bg-base-300 text-base-content p-10 mt-8">
         <aside class="grid-flow-col items-center">
-            <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0H8m8 0v2a2 2 0 01-2 2H10a2 2 0 01-2-2V6m8 0H8" />
-            </svg>
+            <i data-lucide="briefcase" class="h-12 w-12 text-primary"></i>
             <div>
                 <p class="font-bold text-lg">JobHub</p>
                 <p class="text-base-content/70">Connecting talent with opportunity since 2025</p>
@@ -76,5 +71,8 @@
     </footer>
     
     {% block scripts %}{% endblock %}
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
