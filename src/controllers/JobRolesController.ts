@@ -15,7 +15,6 @@ export class JobRolesController {
 
   private initializeRoutes(): void {
     this.router.get("/", this.getAllJobRoles.bind(this));
-    this.router.get("/api", this.getAllJobRolesJson.bind(this));
   }
 
   private getAllJobRoles(_req: Request, res: Response): void {
@@ -48,27 +47,20 @@ export class JobRolesController {
         }),
       });
     } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: "Failed to retrieve job roles",
+      res.status(500).render("job-roles", {
+        title: "Error - Job Roles",
+        description: "An error occurred while loading job roles",
+        jobRoles: [],
+        count: 0,
+        hasNoJobs: true,
         error: error instanceof Error ? error.message : "Unknown error",
-      });
-    }
-  }
-
-  private getAllJobRolesJson(_req: Request, res: Response): void {
-    try {
-      const jobRoles = this.jobRoleService.getAllJobRoles();
-      res.json({
-        success: true,
-        data: jobRoles,
-        count: jobRoles.length,
-      });
-    } catch (error) {
-      res.status(500).json({
-        success: false,
-        message: "Failed to retrieve job roles",
-        error: error instanceof Error ? error.message : "Unknown error",
+        currentDateTime: new Date().toLocaleDateString("en-GB", {
+          year: "numeric",
+          month: "long",
+          day: "numeric",
+          hour: "2-digit",
+          minute: "2-digit",
+        }),
       });
     }
   }
