@@ -1,8 +1,9 @@
-import type { JobRole } from "../models/job-role";
+import type { JobRole } from "../models/job-role.js";
 
 export function createSampleJobRoles(): JobRole[] {
   return [
     {
+      id: "1",
       roleName: "Senior Software Engineer",
       location: "London",
       capability: "Backend Development",
@@ -10,6 +11,7 @@ export function createSampleJobRoles(): JobRole[] {
       closingDate: new Date("2025-11-15"),
     },
     {
+      id: "2",
       roleName: "Junior Frontend Developer",
       location: "Manchester",
       capability: "Frontend Development",
@@ -17,6 +19,7 @@ export function createSampleJobRoles(): JobRole[] {
       closingDate: new Date("2025-10-30"),
     },
     {
+      id: "3",
       roleName: "DevOps Engineer",
       location: "Birmingham",
       capability: "Infrastructure",
@@ -24,6 +27,7 @@ export function createSampleJobRoles(): JobRole[] {
       closingDate: new Date("2025-12-01"),
     },
     {
+      id: "4",
       roleName: "Product Manager",
       location: "Edinburgh",
       capability: "Product Management",
@@ -31,6 +35,7 @@ export function createSampleJobRoles(): JobRole[] {
       closingDate: new Date("2025-11-20"),
     },
     {
+      id: "5",
       roleName: "UX Designer",
       location: "Bristol",
       capability: "Design",

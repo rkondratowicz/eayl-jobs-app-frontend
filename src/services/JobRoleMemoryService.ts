@@ -1,5 +1,5 @@
-import type { JobRole } from "../models/job-role";
-import type { JobRoleService } from "./interfaces";
+import type { JobRole } from "../models/job-role.js";
+import type { JobRoleService } from "./interfaces.js";
 
 export class JobRoleMemoryService implements JobRoleService {
   private jobRoles: JobRole[] = [];
@@ -10,5 +10,10 @@ export class JobRoleMemoryService implements JobRoleService {
 
   getAllJobRoles(): JobRole[] {
     return [...this.jobRoles];
+  }
+
+  getJobRoleById(id: string): JobRole | null {
+    const jobRole = this.jobRoles.find((role) => role.id === id);
+    return jobRole ? { ...jobRole } : null;
   }
 }

@@ -24,7 +24,7 @@ app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
 
 // Import and configure routes
-import { configureRoutes } from "./routes";
+import { configureRoutes } from "./routes/index.js";
 
 // Configure all routes
 configureRoutes(app);
