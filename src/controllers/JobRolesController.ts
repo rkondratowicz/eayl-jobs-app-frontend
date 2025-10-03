@@ -39,13 +39,6 @@ export class JobRolesController {
         jobRoles: processedJobRoles,
         count: jobRoles.length,
         hasNoJobs: jobRoles.length === 0,
-        currentDateTime: new Date().toLocaleDateString("en-GB", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
       });
     } catch (error) {
       res.status(500).render("job-roles", {
@@ -55,13 +48,6 @@ export class JobRolesController {
         count: 0,
         hasNoJobs: true,
         error: error instanceof Error ? error.message : "Unknown error",
-        currentDateTime: new Date().toLocaleDateString("en-GB", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
       });
     }
   }
@@ -107,13 +93,6 @@ export class JobRolesController {
         title: `${jobRole.roleName} - Job Role Details`,
         description: `View details for ${jobRole.roleName} position in ${jobRole.location}`,
         jobRole: processedJobRole,
-        currentDateTime: new Date().toLocaleDateString("en-GB", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
       });
     } catch (error) {
       res.status(500).render("job-role-detail", {
@@ -121,13 +100,6 @@ export class JobRolesController {
         description: "An error occurred while loading job role details",
         error: error instanceof Error ? error.message : "Unknown error",
         jobRole: null,
-        currentDateTime: new Date().toLocaleDateString("en-GB", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
       });
     }
   }
