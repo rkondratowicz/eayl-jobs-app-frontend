@@ -33,7 +33,7 @@ export class JobRolesController {
         }),
       }));
 
-      res.render("job-roles", {
+      res.render("job-roles/index", {
         title: "Available Job Roles",
         description: "Explore exciting career opportunities across various teams and locations",
         jobRoles: processedJobRoles,
@@ -41,7 +41,7 @@ export class JobRolesController {
         hasNoJobs: jobRoles.length === 0,
       });
     } catch (error) {
-      res.status(500).render("job-roles", {
+      res.status(500).render("job-roles/index", {
         title: "Error - Job Roles",
         description: "An error occurred while loading job roles",
         jobRoles: [],
@@ -57,7 +57,7 @@ export class JobRolesController {
       const { id } = req.params;
 
       if (!id) {
-        res.status(400).render("job-role-detail", {
+        res.status(400).render("job-roles/detail", {
           title: "Error - Invalid Job Role",
           description: "Job role ID is required",
           error: "Job role ID is required",
@@ -69,7 +69,7 @@ export class JobRolesController {
       const jobRole = this.jobRoleService.getJobRoleById(id);
 
       if (!jobRole) {
-        res.status(404).render("job-role-detail", {
+        res.status(404).render("job-roles/detail", {
           title: "Error - Job Role Not Found",
           description: "The requested job role could not be found",
           error: "Job role not found",
@@ -89,13 +89,13 @@ export class JobRolesController {
         }),
       };
 
-      res.render("job-role-detail", {
+      res.render("job-roles/detail", {
         title: `${jobRole.roleName} - Job Role Details`,
         description: `View details for ${jobRole.roleName} position in ${jobRole.location}`,
         jobRole: processedJobRole,
       });
     } catch (error) {
-      res.status(500).render("job-role-detail", {
+      res.status(500).render("job-roles/detail", {
         title: "Error - Job Role Details",
         description: "An error occurred while loading job role details",
         error: error instanceof Error ? error.message : "Unknown error",

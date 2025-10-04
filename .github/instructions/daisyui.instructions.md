@@ -250,4 +250,4 @@ A successful DaisyUI implementation should:
 
 ## Example Reference Implementation
 
-See `views/job-roles.njk` for a complete example of proper DaisyUI table implementation that follows all these guidelines.
+See `views/job-roles/index.njk` for a complete example of proper DaisyUI table implementation that follows all these guidelines.

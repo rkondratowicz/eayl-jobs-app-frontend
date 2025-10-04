@@ -106,9 +106,17 @@ npm run css:dev
 ```
 ├── src/
 │   ├── index.ts          # Main application entry point
-│   └── input.css         # Tailwind CSS input file with custom styles
+│   ├── input.css         # Tailwind CSS input file with custom styles
+│   ├── controllers/      # Express route controllers
+│   ├── services/         # Business logic and data services
+│   ├── models/           # TypeScript interfaces and data models
+│   └── routes/           # Route configuration
 ├── views/
-│   └── index.njk         # Nunjucks template files
+│   ├── layout.njk        # Base layout template
+│   ├── index.njk         # Home page template
+│   └── job-roles/        # Job roles feature views
+│       ├── index.njk     # Job roles list view
+│       └── detail.njk    # Job role detail view
 ├── public/
 │   └── styles.css        # Generated Tailwind CSS (auto-generated)
 ├── dist/                 # Compiled JavaScript (after build)
