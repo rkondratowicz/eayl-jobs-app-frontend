@@ -1086,7 +1086,7 @@ This feature can be implemented using only existing dependencies.
 
 **Answer:** 
 ```
-[Stakeholder response goes here]
+No
 ```
 
 **Decision:** `[To be decided]`
@@ -1103,7 +1103,7 @@ This feature can be implemented using only existing dependencies.
 
 **Answer:** 
 ```
-[Stakeholder response goes here]
+Implement later
 ```
 
 **Decision:** `[To be decided]`
@@ -1120,7 +1120,7 @@ This feature can be implemented using only existing dependencies.
 
 **Answer:** 
 ```
-[Stakeholder response goes here]
+No
 ```
 
 **Decision:** `[To be decided]`
@@ -1142,10 +1142,8 @@ This feature can be implemented using only existing dependencies.
 
 **Answer:** 
 ```
-[Stakeholder response goes here]
+No
 ```
-
-**Decision:** `[To be decided]`
 
 **If YES, provide valid band values:**
 ```
@@ -1164,15 +1162,8 @@ This feature can be implemented using only existing dependencies.
 
 **Answer:** 
 ```
-[Stakeholder response goes here]
+No
 ```
-
-**Decision:** `[To be decided]`
-
-**If YES, additional requirements:**
-- Should drafts appear in the main job roles list? `[Yes/No]`
-- Should drafts have a separate view? `[Yes/No]`
-- Who can see drafts? `[Creator only / All users / Admins only]`
 
 ---
 
@@ -1181,7 +1172,7 @@ This feature can be implemented using only existing dependencies.
 
 **Answer:** 
 ```
-[Stakeholder response goes here - list any additional features, edge cases, or requirements]
+No
 ```
 
 ---
