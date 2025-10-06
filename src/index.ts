@@ -22,6 +22,7 @@ app.set("view engine", "njk");
 // Middleware
 app.use(express.static(path.join(__dirname, "../public")));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 // Import and configure routes
 import { configureRoutes } from "./routes/index.js";

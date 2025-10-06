@@ -1,7 +1,11 @@
 {% extends "layout.njk" %}
 
 {% block navbarActions %}
-<div class="badge badge-primary badge-lg">
+<a href="/job-roles/create" class="btn btn-primary btn-sm">
+    <i data-lucide="plus" class="h-4 w-4 mr-1"></i>
+    Create Job Role
+</a>
+<div class="badge badge-primary badge-lg ml-2">
     {{ count }} positions
 </div>
 {% endblock %}

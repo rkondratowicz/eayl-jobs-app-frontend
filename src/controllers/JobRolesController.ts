@@ -1,20 +1,26 @@
 import { type Request, type Response, Router } from "express";
+import type { CreateJobRoleInput } from "../models/job-role.js";
 import type { JobRoleService } from "../services/interfaces.js";
 import { JobRoleMemoryService } from "../services/JobRoleMemoryService.js";
+import { JobRoleValidationService } from "../services/JobRoleValidationService.js";
 import { createSampleJobRoles } from "../services/SampleJobRoleProvider.js";
 
 export class JobRolesController {
   private jobRoleService: JobRoleService;
+  private validationService: JobRoleValidationService;
   public router: Router;
 
-  constructor(jobRoleService?: JobRoleService) {
+  constructor(jobRoleService?: JobRoleService, validationService?: JobRoleValidationService) {
     this.jobRoleService = jobRoleService || new JobRoleMemoryService(createSampleJobRoles());
+    this.validationService = validationService || new JobRoleValidationService();
     this.router = Router();
     this.initializeRoutes();
   }
 
   private initializeRoutes(): void {
     this.router.get("/", this.getAllJobRoles.bind(this));
+    this.router.get("/create", this.showCreateForm.bind(this));
+    this.router.post("/create", this.createJobRole.bind(this));
     this.router.get("/:id", this.getJobRoleById.bind(this));
   }
 
@@ -102,5 +108,66 @@ export class JobRolesController {
         jobRole: null,
       });
     }
+  }
+
+  private showCreateForm(_req: Request, res: Response): void {
+    try {
+      res.render("job-roles/create", {
+        title: "Create Job Role",
+        description: "Add a new job role to the system",
+        errors: [],
+        formData: {},
+      });
+    } catch (error) {
+      res.status(500).render("job-roles/create", {
+        title: "Error - Create Job Role",
+        description: "An error occurred while loading the form",
+        error: error instanceof Error ? error.message : "Unknown error",
+        errors: [],
+        formData: {},
+      });
+    }
+  }
+
+  private createJobRole(req: Request, res: Response): void {
+    try {
+      const input: CreateJobRoleInput = this.parseFormData(req.body);
+      const errors = this.validationService.validateCreateInput(input);
+
+      if (errors.length > 0) {
+        res.status(400).render("job-roles/create", {
+          title: "Create Job Role",
+          description: "Add a new job role to the system",
+          errors,
+          formData: input,
+        });
+        return;
+      }
+
+      const newJobRole = this.jobRoleService.createJobRole(input);
+      res.redirect(`/job-roles/${newJobRole.id}`);
+    } catch (error) {
+      res.status(500).render("job-roles/create", {
+        title: "Error - Create Job Role",
+        description: "An error occurred while creating the job role",
+        error: error instanceof Error ? error.message : "Unknown error",
+        errors: [],
+        formData: req.body,
+      });
+    }
+  }
+
+  private parseFormData(body: Record<string, unknown>): CreateJobRoleInput {
+    return {
+      roleName: String(body["roleName"] || ""),
+      location: String(body["location"] || ""),
+      capability: String(body["capability"] || ""),
+      band: String(body["band"] || ""),
+      closingDate: body["closingDate"] ? new Date(String(body["closingDate"])) : new Date(),
+      status: String(body["status"] || "Draft"),
+      jobSpec: String(body["jobSpec"] || ""),
+      responsibilities: String(body["responsibilities"] || ""),
+      numberOfOpenPositions: Number.parseInt(String(body["numberOfOpenPositions"] || "0"), 10) || 0,
+    };
   }
 }
