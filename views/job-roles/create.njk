@@ -18,7 +18,7 @@
 <div class="max-w-4xl mx-auto">
     {% if errors.length > 0 %}
     <!-- Error Summary -->
-    <div class="alert alert-error mb-6">
+    <div role="alert" class="alert alert-error mb-6">
         <i data-lucide="alert-circle" class="h-5 w-5"></i>
         <div>
             <h3 class="font-bold">Please correct the following errors:</h3>
@@ -32,175 +32,159 @@
     {% endif %}
 
     <!-- Form Card -->
-    <form method="POST" action="/job-roles/create" class="card bg-base-100 shadow-xl">
-        <div class="card-body">
+    <form method="POST" action="/job-roles/create" class="card bg-base-100 shadow-xl" novalidate>
+        <div class="card-body space-y-6">
             <!-- Basic Information Section -->
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold mb-4 flex items-center">
-                    <i data-lucide="info" class="h-6 w-6 mr-2"></i>
+            <div>
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <i data-lucide="info" class="h-6 w-6"></i>
                     Basic Information
                 </h2>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                <div class="space-y-4">
                     <!-- Role Name -->
-                    <div class="form-control md:col-span-2">
-                        <label class="label">
-                            <span class="label-text font-semibold">Role Name <span class="text-error">*</span></span>
-                        </label>
+                    <fieldset class="fieldset md:col-span-2">
+                        <legend class="fieldset-legend">Role Name <span class="text-error">*</span></legend>
                         <input 
                             type="text" 
                             name="roleName" 
                             value="{{ formData.roleName or '' }}"
                             placeholder="e.g., Senior Software Engineer" 
-                            class="input input-bordered {% if errors | selectattr('field', 'equalto', 'roleName') | list | length > 0 %}input-error{% endif %}"
+                            class="input validator {% if errors | selectattr('field', 'equalto', 'roleName') | list | length > 0 %}input-error{% endif %}"
                             required
                         />
-                        {% for error in errors %}
-                            {% if error.field === 'roleName' %}
-                            <label class="label">
-                                <span class="label-text-alt text-error">{{ error.message }}</span>
-                            </label>
+                        {% set roleNameError = errors | selectattr('field', 'equalto', 'roleName') | first %}
+                        {% if roleNameError %}
+                        <div class="label">
+                            <span class="label-text-alt text-error">{{ roleNameError.message }}</span>
+                        </div>
+                        {% endif %}
+                    </fieldset>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Location -->
+                        <fieldset class="fieldset">
+                            <legend class="fieldset-legend">Location <span class="text-error">*</span></legend>
+                            <input 
+                                type="text" 
+                                name="location" 
+                                value="{{ formData.location or '' }}"
+                                placeholder="e.g., Belfast, UK" 
+                                class="input validator {% if errors | selectattr('field', 'equalto', 'location') | list | length > 0 %}input-error{% endif %}"
+                                required
+                            />
+                            {% set locationError = errors | selectattr('field', 'equalto', 'location') | first %}
+                            {% if locationError %}
+                            <div class="label">
+                                <span class="label-text-alt text-error">{{ locationError.message }}</span>
+                            </div>
                             {% endif %}
-                        {% endfor %}
+                        </fieldset>
+
+                        <!-- Capability -->
+                        <fieldset class="fieldset">
+                            <legend class="fieldset-legend">Capability <span class="text-error">*</span></legend>
+                            <input 
+                                type="text" 
+                                name="capability" 
+                                value="{{ formData.capability or '' }}"
+                                placeholder="e.g., Engineering" 
+                                class="input validator {% if errors | selectattr('field', 'equalto', 'capability') | list | length > 0 %}input-error{% endif %}"
+                                required
+                            />
+                            {% set capabilityError = errors | selectattr('field', 'equalto', 'capability') | first %}
+                            {% if capabilityError %}
+                            <div class="label">
+                                <span class="label-text-alt text-error">{{ capabilityError.message }}</span>
+                            </div>
+                            {% endif %}
+                        </fieldset>
                     </div>
 
-                    <!-- Location -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text font-semibold">Location <span class="text-error">*</span></span>
-                        </label>
-                        <input 
-                            type="text" 
-                            name="location" 
-                            value="{{ formData.location or '' }}"
-                            placeholder="e.g., Belfast, UK" 
-                            class="input input-bordered {% if errors | selectattr('field', 'equalto', 'location') | list | length > 0 %}input-error{% endif %}"
-                            required
-                        />
-                        {% for error in errors %}
-                            {% if error.field === 'location' %}
-                            <label class="label">
-                                <span class="label-text-alt text-error">{{ error.message }}</span>
-                            </label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Band -->
+                        <fieldset class="fieldset">
+                            <legend class="fieldset-legend">Band <span class="text-error">*</span></legend>
+                            <select 
+                                name="band" 
+                                class="select validator {% if errors | selectattr('field', 'equalto', 'band') | list | length > 0 %}select-error{% endif %}"
+                                required
+                            >
+                                <option value="" disabled {% if not formData.band %}selected{% endif %}>Select a band</option>
+                                <option value="Junior" {% if formData.band === 'Junior' %}selected{% endif %}>Junior</option>
+                                <option value="Mid" {% if formData.band === 'Mid' %}selected{% endif %}>Mid</option>
+                                <option value="Senior" {% if formData.band === 'Senior' %}selected{% endif %}>Senior</option>
+                                <option value="Principal" {% if formData.band === 'Principal' %}selected{% endif %}>Principal</option>
+                                <option value="Lead" {% if formData.band === 'Lead' %}selected{% endif %}>Lead</option>
+                            </select>
+                            {% set bandError = errors | selectattr('field', 'equalto', 'band') | first %}
+                            {% if bandError %}
+                            <div class="label">
+                                <span class="label-text-alt text-error">{{ bandError.message }}</span>
+                            </div>
                             {% endif %}
-                        {% endfor %}
+                        </fieldset>
+
+                        <!-- Status -->
+                        <fieldset class="fieldset">
+                            <legend class="fieldset-legend">Status <span class="text-error">*</span></legend>
+                            <select 
+                                name="status" 
+                                class="select validator {% if errors | selectattr('field', 'equalto', 'status') | list | length > 0 %}select-error{% endif %}"
+                                required
+                            >
+                                <option value="Draft" {% if formData.status === 'Draft' or not formData.status %}selected{% endif %}>Draft</option>
+                                <option value="Open" {% if formData.status === 'Open' %}selected{% endif %}>Open</option>
+                                <option value="Closed" {% if formData.status === 'Closed' %}selected{% endif %}>Closed</option>
+                            </select>
+                            {% set statusError = errors | selectattr('field', 'equalto', 'status') | first %}
+                            {% if statusError %}
+                            <div class="label">
+                                <span class="label-text-alt text-error">{{ statusError.message }}</span>
+                            </div>
+                            {% endif %}
+                        </fieldset>
                     </div>
 
-                    <!-- Capability -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text font-semibold">Capability <span class="text-error">*</span></span>
-                        </label>
-                        <input 
-                            type="text" 
-                            name="capability" 
-                            value="{{ formData.capability or '' }}"
-                            placeholder="e.g., Engineering" 
-                            class="input input-bordered {% if errors | selectattr('field', 'equalto', 'capability') | list | length > 0 %}input-error{% endif %}"
-                            required
-                        />
-                        {% for error in errors %}
-                            {% if error.field === 'capability' %}
-                            <label class="label">
-                                <span class="label-text-alt text-error">{{ error.message }}</span>
-                            </label>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- Closing Date -->
+                        <fieldset class="fieldset">
+                            <legend class="fieldset-legend">Closing Date <span class="text-error">*</span></legend>
+                            <input 
+                                type="date" 
+                                name="closingDate" 
+                                value="{{ formData.closingDate.toISOString().split('T')[0] if formData.closingDate else '' }}"
+                                class="input validator {% if errors | selectattr('field', 'equalto', 'closingDate') | list | length > 0 %}input-error{% endif %}"
+                                required
+                            />
+                            {% set closingDateError = errors | selectattr('field', 'equalto', 'closingDate') | first %}
+                            {% if closingDateError %}
+                            <div class="label">
+                                <span class="label-text-alt text-error">{{ closingDateError.message }}</span>
+                            </div>
                             {% endif %}
-                        {% endfor %}
-                    </div>
+                        </fieldset>
 
-                    <!-- Band -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text font-semibold">Band <span class="text-error">*</span></span>
-                        </label>
-                        <select 
-                            name="band" 
-                            class="select select-bordered {% if errors | selectattr('field', 'equalto', 'band') | list | length > 0 %}select-error{% endif %}"
-                            required
-                        >
-                            <option value="" disabled {% if not formData.band %}selected{% endif %}>Select a band</option>
-                            <option value="Junior" {% if formData.band === 'Junior' %}selected{% endif %}>Junior</option>
-                            <option value="Mid" {% if formData.band === 'Mid' %}selected{% endif %}>Mid</option>
-                            <option value="Senior" {% if formData.band === 'Senior' %}selected{% endif %}>Senior</option>
-                            <option value="Principal" {% if formData.band === 'Principal' %}selected{% endif %}>Principal</option>
-                            <option value="Lead" {% if formData.band === 'Lead' %}selected{% endif %}>Lead</option>
-                        </select>
-                        {% for error in errors %}
-                            {% if error.field === 'band' %}
-                            <label class="label">
-                                <span class="label-text-alt text-error">{{ error.message }}</span>
-                            </label>
+                        <!-- Number of Open Positions -->
+                        <fieldset class="fieldset">
+                            <legend class="fieldset-legend">Open Positions <span class="text-error">*</span></legend>
+                            <input 
+                                type="number" 
+                                name="numberOfOpenPositions" 
+                                value="{{ formData.numberOfOpenPositions or '' }}"
+                                placeholder="e.g., 2" 
+                                min="1" 
+                                max="999"
+                                class="input validator {% if errors | selectattr('field', 'equalto', 'numberOfOpenPositions') | list | length > 0 %}input-error{% endif %}"
+                                required
+                            />
+                            {% set positionsError = errors | selectattr('field', 'equalto', 'numberOfOpenPositions') | first %}
+                            {% if positionsError %}
+                            <div class="label">
+                                <span class="label-text-alt text-error">{{ positionsError.message }}</span>
+                            </div>
                             {% endif %}
-                        {% endfor %}
-                    </div>
-
-                    <!-- Status -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text font-semibold">Status <span class="text-error">*</span></span>
-                        </label>
-                        <select 
-                            name="status" 
-                            class="select select-bordered {% if errors | selectattr('field', 'equalto', 'status') | list | length > 0 %}select-error{% endif %}"
-                            required
-                        >
-                            <option value="Draft" {% if formData.status === 'Draft' or not formData.status %}selected{% endif %}>Draft</option>
-                            <option value="Open" {% if formData.status === 'Open' %}selected{% endif %}>Open</option>
-                            <option value="Closed" {% if formData.status === 'Closed' %}selected{% endif %}>Closed</option>
-                        </select>
-                        {% for error in errors %}
-                            {% if error.field === 'status' %}
-                            <label class="label">
-                                <span class="label-text-alt text-error">{{ error.message }}</span>
-                            </label>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                    <!-- Closing Date -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text font-semibold">Closing Date <span class="text-error">*</span></span>
-                        </label>
-                        <input 
-                            type="date" 
-                            name="closingDate" 
-                            value="{{ formData.closingDate.toISOString().split('T')[0] if formData.closingDate else '' }}"
-                            class="input input-bordered {% if errors | selectattr('field', 'equalto', 'closingDate') | list | length > 0 %}input-error{% endif %}"
-                            required
-                        />
-                        {% for error in errors %}
-                            {% if error.field === 'closingDate' %}
-                            <label class="label">
-                                <span class="label-text-alt text-error">{{ error.message }}</span>
-                            </label>
-                            {% endif %}
-                        {% endfor %}
-                    </div>
-
-                    <!-- Number of Open Positions -->
-                    <div class="form-control">
-                        <label class="label">
-                            <span class="label-text font-semibold">Open Positions <span class="text-error">*</span></span>
-                        </label>
-                        <input 
-                            type="number" 
-                            name="numberOfOpenPositions" 
-                            value="{{ formData.numberOfOpenPositions or '' }}"
-                            placeholder="e.g., 2" 
-                            min="1" 
-                            max="999"
-                            class="input input-bordered {% if errors | selectattr('field', 'equalto', 'numberOfOpenPositions') | list | length > 0 %}input-error{% endif %}"
-                            required
-                        />
-                        {% for error in errors %}
-                            {% if error.field === 'numberOfOpenPositions' %}
-                            <label class="label">
-                                <span class="label-text-alt text-error">{{ error.message }}</span>
-                            </label>
-                            {% endif %}
-                        {% endfor %}
+                        </fieldset>
                     </div>
                 </div>
             </div>
@@ -208,60 +192,58 @@
             <div class="divider"></div>
 
             <!-- Job Details Section -->
-            <div class="mb-6">
-                <h2 class="text-2xl font-bold mb-4 flex items-center">
-                    <i data-lucide="file-text" class="h-6 w-6 mr-2"></i>
+            <div>
+                <h2 class="text-2xl font-bold mb-6 flex items-center gap-2">
+                    <i data-lucide="file-text" class="h-6 w-6"></i>
                     Job Details
                 </h2>
 
-                <!-- Job Specification -->
-                <div class="form-control mb-4">
-                    <label class="label">
-                        <span class="label-text font-semibold">Job Specification <span class="text-error">*</span></span>
-                        <span class="label-text-alt">Minimum 10 characters</span>
-                    </label>
-                    <textarea 
-                        name="jobSpec" 
-                        rows="6"
-                        placeholder="Describe the role, requirements, and key qualifications..." 
-                        class="textarea textarea-bordered {% if errors | selectattr('field', 'equalto', 'jobSpec') | list | length > 0 %}textarea-error{% endif %}"
-                        required
-                    >{{ formData.jobSpec or '' }}</textarea>
-                    {% for error in errors %}
-                        {% if error.field === 'jobSpec' %}
-                        <label class="label">
-                            <span class="label-text-alt text-error">{{ error.message }}</span>
-                        </label>
+                <div class="space-y-4">
+                    <!-- Job Specification -->
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend">Job Specification <span class="text-error">*</span></legend>
+                        <textarea 
+                            name="jobSpec" 
+                            rows="6"
+                            placeholder="Describe the role, requirements, and key qualifications..." 
+                            class="textarea validator {% if errors | selectattr('field', 'equalto', 'jobSpec') | list | length > 0 %}textarea-error{% endif %}"
+                            minlength="10"
+                            required
+                        >{{ formData.jobSpec or '' }}</textarea>
+                        <span class="label">Minimum 10 characters</span>
+                        {% set jobSpecError = errors | selectattr('field', 'equalto', 'jobSpec') | first %}
+                        {% if jobSpecError %}
+                        <div class="label">
+                            <span class="label-text-alt text-error">{{ jobSpecError.message }}</span>
+                        </div>
                         {% endif %}
-                    {% endfor %}
-                </div>
+                    </fieldset>
 
-                <!-- Responsibilities -->
-                <div class="form-control">
-                    <label class="label">
-                        <span class="label-text font-semibold">Responsibilities <span class="text-error">*</span></span>
-                        <span class="label-text-alt">Minimum 10 characters</span>
-                    </label>
-                    <textarea 
-                        name="responsibilities" 
-                        rows="6"
-                        placeholder="List the main responsibilities and duties..." 
-                        class="textarea textarea-bordered {% if errors | selectattr('field', 'equalto', 'responsibilities') | list | length > 0 %}textarea-error{% endif %}"
-                        required
-                    >{{ formData.responsibilities or '' }}</textarea>
-                    {% for error in errors %}
-                        {% if error.field === 'responsibilities' %}
-                        <label class="label">
-                            <span class="label-text-alt text-error">{{ error.message }}</span>
-                        </label>
+                    <!-- Responsibilities -->
+                    <fieldset class="fieldset">
+                        <legend class="fieldset-legend">Responsibilities <span class="text-error">*</span></legend>
+                        <textarea 
+                            name="responsibilities" 
+                            rows="6"
+                            placeholder="List the main responsibilities and duties..." 
+                            class="textarea validator {% if errors | selectattr('field', 'equalto', 'responsibilities') | list | length > 0 %}textarea-error{% endif %}"
+                            minlength="10"
+                            required
+                        >{{ formData.responsibilities or '' }}</textarea>
+                        <span class="label">Minimum 10 characters</span>
+                        {% set responsibilitiesError = errors | selectattr('field', 'equalto', 'responsibilities') | first %}
+                        {% if responsibilitiesError %}
+                        <div class="label">
+                            <span class="label-text-alt text-error">{{ responsibilitiesError.message }}</span>
+                        </div>
                         {% endif %}
-                    {% endfor %}
+                    </fieldset>
                 </div>
             </div>
         </div>
 
         <!-- Card Actions -->
-        <div class="card-actions justify-end p-6 bg-base-200">
+        <div class="card-actions justify-end p-6 bg-base-200 gap-2">
             <a href="/job-roles" class="btn btn-ghost">
                 <i data-lucide="x" class="h-4 w-4 mr-1"></i>
                 Cancel

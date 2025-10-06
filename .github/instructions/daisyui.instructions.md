@@ -118,9 +118,109 @@ Available modifiers include:
 - **Use `btn-xs` or `btn-sm`** for table actions to maintain proportion
 
 ### Forms
-- Use `input`, `textarea`, `select` base classes
-- Apply size modifiers: `input-sm`, `input-md`, `input-lg`
-- Use variant classes: `input-bordered`, `input-primary`
+
+#### Modern Form Structure (Recommended)
+✅ **Use `fieldset` with `fieldset-legend` for semantic grouping**:
+```html
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">Field Name <span class="text-error">*</span></legend>
+  <input type="text" class="input validator" required placeholder="Enter value" />
+  <span class="label">Optional helper text</span>
+</fieldset>
+```
+
+#### Form Validation with `validator` Class
+✅ **Use `validator` class for automatic validation styling**:
+```html
+<!-- Input with validation -->
+<input type="email" class="input validator" required placeholder="mail@site.com" />
+<div class="validator-hint">Enter valid email address</div>
+
+<!-- Select with validation -->
+<select class="select validator" required>
+  <option value="" disabled selected>Choose an option</option>
+  <option>Option 1</option>
+</select>
+
+<!-- Textarea with validation -->
+<textarea class="textarea validator" minlength="10" required></textarea>
+<span class="label">Minimum 10 characters</span>
+```
+
+**Why `validator` class?**
+- Automatically changes border/text color based on validation state (`:valid`, `:invalid`)
+- Provides immediate visual feedback to users
+- Eliminates need for manual error state management
+- Works with HTML5 validation attributes (`required`, `pattern`, `minlength`, etc.)
+
+#### Error States
+When showing server-side validation errors, combine `validator` with error modifiers:
+```html
+<input type="text" class="input validator input-error" />
+<div class="label">
+  <span class="label-text-alt text-error">{{ errorMessage }}</span>
+</div>
+```
+
+**Nunjucks Template Best Practice for Error Display**:
+```html
+<!-- Use the 'first' filter to get the first matching error efficiently -->
+{% set fieldError = errors | selectattr('field', 'equalto', 'fieldName') | first %}
+{% if fieldError %}
+<div class="label">
+  <span class="label-text-alt text-error">{{ fieldError.message }}</span>
+</div>
+{% endif %}
+```
+
+**Why this approach?**
+- More efficient than looping through all errors for each field
+- Cleaner code with less nesting
+- Easier to read and maintain
+
+#### Form Component Patterns
+- **Base classes**: `input`, `textarea`, `select`
+- **Validation**: Add `validator` class for automatic validation styling
+- **Size modifiers**: `input-sm`, `input-md`, `input-lg`
+- **Variant classes**: `input-bordered`, `input-primary`, `input-error`
+- **Semantic structure**: Use `fieldset` + `fieldset-legend` for accessibility
+- **Helper text**: Use `label` class for hints and optional information
+- **Error hints**: Use `validator-hint` class for validation messages
+
+#### Complete Form Example
+```html
+<form method="POST" class="card bg-base-100 shadow-xl" novalidate>
+  <div class="card-body space-y-4">
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Email <span class="text-error">*</span></legend>
+      <input 
+        type="email" 
+        class="input validator"
+        required 
+        placeholder="mail@site.com"
+      />
+      <div class="validator-hint">Enter valid email address</div>
+    </fieldset>
+
+    <fieldset class="fieldset">
+      <legend class="fieldset-legend">Message <span class="text-error">*</span></legend>
+      <textarea 
+        class="textarea validator" 
+        rows="4"
+        minlength="10"
+        required
+        placeholder="Your message..."
+      ></textarea>
+      <span class="label">Minimum 10 characters</span>
+    </fieldset>
+  </div>
+
+  <div class="card-actions justify-end p-6 bg-base-200 gap-2">
+    <button type="reset" class="btn btn-ghost">Cancel</button>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </div>
+</form>
+```
 
 ### Cards
 - Start with `card` base class
@@ -171,6 +271,41 @@ Available modifiers include:
 ```html
 <div class="overflow-x-auto">
   <table class="table">
+```
+
+### 4. **Don't Use Outdated Form Patterns**
+❌ **Avoid**:
+```html
+<!-- Old pattern with form-control -->
+<div class="form-control">
+  <label class="label">
+    <span class="label-text">Field Name</span>
+  </label>
+  <input type="text" class="input input-bordered" />
+</div>
+```
+
+✅ **Instead**:
+```html
+<!-- Modern pattern with fieldset and validator -->
+<fieldset class="fieldset">
+  <legend class="fieldset-legend">Field Name</legend>
+  <input type="text" class="input validator" required />
+</fieldset>
+```
+
+### 5. **Don't Manually Manage Error States in Forms**
+❌ **Avoid**:
+```html
+<!-- Manual error class toggling -->
+<input type="text" class="input input-bordered input-error" />
+```
+
+✅ **Instead**:
+```html
+<!-- Let validator class handle it automatically -->
+<input type="email" class="input validator" required />
+<div class="validator-hint">Enter valid email</div>
 ```
 
 ## Quality Assurance Workflow
@@ -250,4 +385,16 @@ A successful DaisyUI implementation should:
 
 ## Example Reference Implementation
 
-See `views/job-roles/index.njk` for a complete example of proper DaisyUI table implementation that follows all these guidelines.
+- **Tables**: See `views/job-roles/index.njk` for a complete example of proper DaisyUI table implementation
+- **Forms**: See `views/job-roles/create.njk` for a complete example of modern form implementation with `fieldset`, `validator`, and proper error handling
+
+## Key Takeaways for Forms
+
+1. **Always use `fieldset` + `fieldset-legend`** instead of `form-control` + `label`
+2. **Always use `validator` class** on inputs, selects, and textareas for automatic validation styling
+3. **Use `validator-hint`** for validation error messages (automatically shown/hidden)
+4. **Use `label` class** for helper text and optional information
+5. **Add HTML5 validation attributes** (`required`, `minlength`, `pattern`, etc.) for client-side validation
+6. **Add `novalidate`** to forms to control validation display timing
+7. **Use `space-y-*`** for consistent vertical spacing instead of manual margins
+8. **Combine with error modifiers** (`input-error`, `select-error`) only when showing server-side errors

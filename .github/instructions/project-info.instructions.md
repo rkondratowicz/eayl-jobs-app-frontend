@@ -61,7 +61,9 @@ src/
 - **Template Engine**: Nunjucks with autoescape enabled
 - **Styling**: DaisyUI components with Tailwind CSS utilities
 - **Responsive Design**: Mobile-first approach with overflow handling for tables
-- **Theme System**: DaisyUI theming with `data-theme="light"` default
+- **Theme System**: DaisyUI theming with `data-theme="lofi"` default
+- **Form Patterns**: Modern `fieldset` + `validator` approach for accessibility and validation
+- **Error Handling**: Efficient Nunjucks filters (`first`, `selectattr`) for error display
 
 ## Build and Development Workflow
 

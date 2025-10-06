@@ -20,8 +20,7 @@
     "lint:check": "biome lint .",
     "check": "biome check --write src/ views/ package.json tsconfig.json biome.json",
     "check:ci": "biome ci src/ views/ package.json tsconfig.json biome.json",
-    "test": "vitest",
-    "test:run": "vitest run",
+    "test": "vitest run",
     "test:coverage": "vitest run --coverage"
   },
   "keywords": [
